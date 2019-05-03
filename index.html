@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <META charset="utf-8" />
+    <TITLE>Input form</TITLE>
+    <link rel="stylesheet" type="text/css" href="css/theme.css""/> 
+ <script lang="javascript" type="text/javascript">
+ /*returns true if duplicates are found*/
+ function hasDuplicates(array) {
+    return (new Set(array)).size !== array.length;
+}
+ function validate(){
+    var inputs = document.getElementsByTagName("input");
+    var numbers=[4];
+    var message =
+   "The form has the following input elements with the 'type' attribute = 'number': \n\n";
+ 
+for (var i=0; i < inputs.length; i++){
+ 
+   if (inputs[i].getAttribute('type') == 'number')   {
+   
+    message += inputs[i].getAttribute('name') +  "  = '";
+    message += inputs[i].value + "'\n";
+     
+   if(inputs[i].value==""){
+        alert("inputs["+ i +"].value "+inputs[i].value + " is not a number!");
+        return false;
+    }
+   numbers[i]=inputs[i].value;
+   
+   
+   }
+}
+//alert(numbers.slice(0,5).length);
+//alert(message);
+
+    if (hasDuplicates(numbers.slice(0,5))){//exempt last joker number from duplicate check
+        message="Please enter unique numbers for the first 5 slots!"
+        alert(message);
+        return false;
+    } else { 
+        return true;
+    }
+
+ }
+ </script>
+  </HEAD>
+  <BODY>
+        <p class="text">Υλοποιήστε το τυχερό παιχνίδι Τζόκερ.
+
+            Σε μια φόρμα θα εισάγετε 5 μοναδικούς αριθμούς στο διάστημα [1,45] και 1 αριθμό στο διάστημα [1,20] και θα
+            τους υποβάλετε.
+
+            Στη συνέχεια θα γίνεται μια τυχαία κλήρωση 5 μοναδικών αριθμών στο διάστημα [1,45] και 1 αριθμού στο
+            διάστημα [1,20].
+
+            Θα εμφανίζεται ο πίνακας που παίξατε και ο πίνακας που κληρώθηκε και πόσους αριθμούς βρήκατε π.χ. 5+1 ή 3+0
+            και το ποσό που κερδίσατε.
+
+            Αν δεν κερδίζετε θα εμφανίζεται ένας κουβάς.</p>
+      
+            <fieldset>
+                <legend>Select your numbers</legend>
+                    <form name="form1" action="receive.php" method="POST" onsubmit="return validate();">
+               
+                <p>
+                    <label>Enter the first number:</label>
+                    <input type="number" name="numbers[0]" min="1" max="45" step="1" placeholder="1" value="1" />
+                </p>
+                <p>
+                    <label>Enter the next number:</label>
+                    <input type="number" name="numbers[1]" min="1" max="45" step="1" placeholder="1" value="2" />
+                </p>
+                <p>
+                    <label>Enter the next number:</label>
+                    <input type="number" name="numbers[2]" min="1" max="45" step="1" placeholder="1" value="3" />
+                </p>
+                <p>
+                    <label>Enter the next number:</label>
+                    <input type="number" name="numbers[3]" min="1" max="45" step="1" placeholder="1" value="4" />
+                </p>
+                <p>
+                    <label>Enter the last number:</label>
+                    <input type="number" name="numbers[4]" min="1" max="45" step="1" placeholder="1" value="5" />
+                </p>
+                <p>
+                    <label>Enter the joker number:</label>
+                    <input type="number" name="numbers[5]" min="1" max="20" step="1" placeholder="1" value="1" />
+                </p>
+                <p>
+                    <input type="reset" name="Reset" value="Reset" />
+                    <input type="submit" name="Next" value="Next" />
+                </p>
+        
+            </form>
+        </fieldset>
+        </body>
+
+</html>
